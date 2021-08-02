@@ -33,11 +33,9 @@ from vector._methods import (
 
 
 def cartesian(lib, xx, xy, xz, yx, yy, yz, zx, zy, zz, x, y, z):
-    xp = xx * x + xy * y + xz * z
-    yp = yx * x + yy * y + yz * z
-    zp = zx * x + zy * y + zz * z
-    return (xp, yp, zp)
-
+    transformation = numpy.array([[xx, xy, xz], [yx, yy, yz], [zx, zy, zz]])
+    original = numpy.array(x, y, z)
+    return numpy.dot(original, transformation)
 
 def xy_theta(lib, xx, xy, xz, yx, yy, yz, zx, zy, zz, x, y, theta):
     return cartesian(
@@ -144,3 +142,4 @@ def dispatch(obj: typing.Any, v: typing.Any) -> typing.Any:
             returns,
             1,
         )
+
